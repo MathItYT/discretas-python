@@ -220,6 +220,31 @@ def texto(
     return NoEscape(texto)
 
 
+def texto_en_negrita(
+    texto: str
+) -> str:
+    return f"\\textbf{{{texto}}}"
+
+
+def texto_en_cursiva(
+    texto: str
+) -> str:
+    return f"\\textit{{{texto}}}"
+
+
+def texto_en_negrita_y_cursiva(
+    texto: str
+) -> str:
+    return f"\\textbf{{\\textit{{{texto}}}}}"
+
+
+def imagen(
+    ruta: str,
+    alto_en_px: int,
+) -> NoEscape:
+    return NoEscape(f"\\includegraphics[height={alto_en_px}px]{{{ruta}}}")
+
+
 def ecuacion(
     texto: str
 ) -> NoEscape:
@@ -232,12 +257,6 @@ def ecuacion_en_linea(
     return f"\\(\\displaystyle {texto}\\)"
 
 
-def centrar(
-    contenido: str
-) -> NoEscape:
-    return NoEscape(f"\\begin{{center}}\n{contenido}\n\\end{{center}}")
-
-
 def ecuacion_numerada(
     texto: str,
     numero: int
@@ -245,10 +264,17 @@ def ecuacion_numerada(
     return NoEscape(f"\\[\n{texto}\n\\tag{{{numero}}}\\]")
 
 
+def centrar(
+    *contenido: str
+) -> NoEscape:
+    contenido = "\n".join(contenido)
+    return NoEscape(f"\\begin{{center}}\n{contenido}\n\\end{{center}}")
+
+
 def texto_plano(
     texto: str
 ) -> str:
-    return texto
+    return f"\\text{{{texto}}}"
 
 
 def tabla(
@@ -297,11 +323,117 @@ def producto(
     return f"\\prod_{{{inicio}}}^{{{fin}}}{funcion}"
 
 
+def conjuncion_iterada(
+    inicio: str,
+    fin: str,
+    funcion: str
+) -> str:
+    return f"\\bigwedge_{{{inicio}}}^{{{fin}}}{funcion}"
+
+
+def disyuncion_iterada(
+    inicio: str,
+    fin: str,
+    funcion: str
+) -> str:
+    return f"\\bigvee_{{{inicio}}}^{{{fin}}}{funcion}"
+
+
+def union_iterada(
+    inicio: str,
+    fin: str,
+    funcion: str
+) -> str:
+    return f"\\bigcup_{{{inicio}}}^{{{fin}}}{funcion}"
+
+
+def interseccion_iterada(
+    inicio: str,
+    fin: str,
+    funcion: str
+) -> str:
+    return f"\\bigcap_{{{inicio}}}^{{{fin}}}{funcion}"
+
+
+def conjuncion(
+    *proposiciones: str
+) -> str:
+    return " \\land ".join(proposiciones)
+
+
+def disyuncion(
+    *proposiciones: str
+) -> str:
+    return " \\lor ".join(proposiciones)
+
+
+def implicancia(
+    antecedente: str,
+    consecuente: str
+) -> str:
+    return f"{antecedente} \\Rightarrow {consecuente}"
+
+
+def bicondicional(
+    antecedente: str,
+    consecuente: str
+) -> str:
+    return f"{antecedente} \\Leftrightarrow {consecuente}"
+
+
+def negacion(
+    proposicion: str
+) -> str:
+    return f"\\neg {proposicion}"
+
+
+def cuantificador_universal(
+    variable: str,
+    conjunto: str,
+    proposicion: str
+) -> str:
+    return f"\\forall {variable} \\in {conjunto}, {proposicion}"
+
+
+def cuantificador_existencial(
+    variable: str,
+    conjunto: str,
+    proposicion: str
+) -> str:
+    return f"\\exists {variable} \\in {conjunto}, {proposicion}"
+
+
+def cuantificador_existencial_unico(
+    variable: str,
+    conjunto: str,
+    proposicion: str
+) -> str:
+    return f"\\exists! {variable} \\in {conjunto}, {proposicion}"
+
+
+def union(
+    *conjuntos: str
+) -> str:
+    return " \\cup ".join(conjuntos)
+
+
+def interseccion(
+    *conjuntos: str
+) -> str:
+    return " \\cap ".join(conjuntos)
+
+
 def raiz(
     indice: str,
     radicando: str
 ) -> str:
     return f"\\sqrt[{indice}]{{{radicando}}}"
+
+
+def factorial(
+    n: str
+) -> str:
+    return f"{n}!"
 
 
 def raiz_cuadrada(
@@ -341,7 +473,7 @@ def valor_absoluto(
     return f"\\left|{contenido}\\right|"
 
 
-def equivalencia_modulo(
+def congruencia_modulo(
     a: str,
     b: str,
     n: str
@@ -354,6 +486,31 @@ def subindice(
     subindice: str
 ) -> str:
     return f"{base}_{{{subindice}}}"
+
+
+def log(
+    base: str,
+    argumento: str
+) -> str:
+    return f"\\log_{{{base}}}({argumento})"
+
+
+def ln(
+    argumento: str
+) -> str:
+    return f"\\ln({argumento})"
+
+
+def log2(
+    argumento: str
+) -> str:
+    return f"\\log_2({argumento})"
+
+
+def log_sin_base(
+    argumento: str
+) -> str:
+    return f"\\log({argumento})"
 
 
 def grafo(
