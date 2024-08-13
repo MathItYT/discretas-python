@@ -143,8 +143,6 @@ def generar_desde_plantilla(
             doc.preamble.append(NoEscape(f"\\rhead{{Tarea {n_tarea} - \\alumno}}"))
         elif "Pregunta 1" in line or "Pregunta 2" in line:
             continue
-        elif line.startswith("%"):
-            continue
         elif line == "\\newpage":
             continue
         elif re.match(package_wo_options_regex, line):
